@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="bg-[#181818] text-white">
-      <div className="container p-10 mx-auto footer">
+      <div className="container col-span-2 p-10 mx-auto footer">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
@@ -22,7 +22,7 @@ const Footer = () => {
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
         </nav>
-        <form>
+        <form className="col-span-2">
           <h6 className="footer-title">Newsletter</h6>
           <fieldset className="form-control w-80">
             <div className="join">

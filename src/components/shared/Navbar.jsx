@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="container z-[9999] mx-auto bg-transparent">
       <div className="navbar">
-        <div className="navbar-start">
+        <div className="flex-1 navbar-start">
           <div className="dropdown">
             <div
               tabIndex={0}
@@ -38,7 +38,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/">
-            <button className="text-3xl shadows-into-light">
+            <button className="text-xl lg:text-3xl shadows-into-light">
               Headline Hub
             </button>
           </Link>
@@ -48,9 +48,23 @@ const Navbar = () => {
             <NavOption />
           </ul>
         </div>
-        <div className="navbar-end">
-          {/* <img src="" alt="" /> */}
-          <FaUser />
+        <div className="gap-5 mr-5 navbar-end">
+          <div className="p-4 rounded-full bg-slate-200">
+            <FaUser />
+          </div>
+
+          <Link
+            to="login"
+            className="px-6 text-white bg-blue-500 btn hover:bg-blue-600 hover:text-white"
+          >
+            Login
+          </Link>
+          <Link
+            to="sign-up"
+            className="px-5 text-white bg-green-500 btn hover:bg-green-600 hover:text-white"
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
     </nav>
