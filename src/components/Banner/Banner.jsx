@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SlideControl from "./SlideControl";
 
 import "swiper/css/navigation";
-import SlideControl from "./SlideControl";
-const Banner = () => {
-  const [allNews, setAllNews] = useState([]);
-  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const getAllNewsData = async () => {
-      const res = await axiosPublic.get("/all-news");
-      setAllNews(res.data);
-    };
-
-    getAllNewsData();
-  }, []);
-
+const Banner = ({ allNews }) => {
   return (
-    <div className="container mx-auto mb-10">
+    <div>
       <div className="grid gap-2 md:grid-rows-2 md:grid-cols-4">
         <div className="relative col-span-2 row-span-2 overflow-hidden">
           <Swiper modules={[Navigation]}>

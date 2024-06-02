@@ -9,13 +9,13 @@ const SlideControl = () => {
     <div className="absolute z-50 flex items-center justify-center gap-5 right-5 bottom-20">
       <button
         onClick={() => swiper.slidePrev()}
-        className="p-2 text-red-500 bg-white rounded-full hover:bg-red-500 hover:text-white"
+        className="p-2 text-white bg-red-500 rounded-full"
       >
         <FaArrowLeft />
       </button>
       <button
         onClick={() => swiper.slideNext()}
-        className="p-2 text-red-500 bg-white rounded-full hover:bg-red-500 hover:text-white"
+        className="p-2 text-white bg-red-500 rounded-full"
       >
         <FaArrowRight />
       </button>
