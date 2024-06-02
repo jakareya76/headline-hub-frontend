@@ -39,7 +39,7 @@ const Navbar = () => {
               <NavOption />
             </ul>
           </div>
-          <Link to="/">
+          <Link to="/" className="block lg:hidden">
             <button className="text-xl lg:text-3xl shadows-into-light">
               Headline Hub
             </button>
@@ -47,6 +47,11 @@ const Navbar = () => {
         </div>
         <div className="hidden navbar-center lg:flex">
           <ul className="gap-5 px-1 menu menu-horizontal">
+            <Link to="/" className="hidden lg:block">
+              <button className="text-xl lg:text-3xl shadows-into-light">
+                Headline Hub
+              </button>
+            </Link>
             <NavOption />
           </ul>
         </div>

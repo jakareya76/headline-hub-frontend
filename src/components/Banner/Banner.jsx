@@ -3,6 +3,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import SlideControl from "./SlideControl";
 
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 const Banner = ({ allNews }) => {
   return (
@@ -20,12 +21,13 @@ const Banner = ({ allNews }) => {
               return (
                 <SwiperSlide key={news._id}>
                   <div className="relative">
-                    <img
-                      src={news.image}
-                      alt="news-img"
-                      className="w-full h-full duration-300 cursor-pointer hover:scale-110"
-                    />
-
+                    <Link to={`/news/${news._id}`}>
+                      <img
+                        src={news.image}
+                        alt="news-img"
+                        className="w-full h-full duration-300 cursor-pointer hover:scale-110"
+                      />
+                    </Link>
                     <h2 className="absolute bottom-0 z-20 w-full p-5 font-semibold text-white bg-[#0202029a]">
                       {news.title}
                     </h2>
@@ -39,16 +41,18 @@ const Banner = ({ allNews }) => {
 
         {allNews.slice(6, 10).map((news) => {
           return (
-            <div key={news._id} className="relative overflow-hidden">
-              <img
-                src={news?.image}
-                alt="news-img"
-                className="duration-300 cursor-pointer hover:scale-125"
-              />
-              <h2 className="absolute bottom-0 z-20 w-full p-2 font-semibold text-white bg-[#0202029a]">
-                {news.title}
-              </h2>
-            </div>
+            <Link to={`/news/${news._id}`} key={news._id}>
+              <div className="relative overflow-hidden">
+                <img
+                  src={news?.image}
+                  alt="news-img"
+                  className="duration-300 cursor-pointer hover:scale-125"
+                />
+                <h2 className="absolute bottom-0 z-20 w-full p-2 font-semibold text-white bg-[#0202029a]">
+                  {news.title}
+                </h2>
+              </div>
+            </Link>
           );
         })}
       </div>

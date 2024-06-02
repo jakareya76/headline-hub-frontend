@@ -9,7 +9,7 @@ const NavOption = () => {
       <li>
         <NavLink to="/all-articles">All Articles</NavLink>
       </li>
-      {/* <li>
+      <li>
         <NavLink to="/add-articles">Add Articles</NavLink>
       </li>
       <li>
@@ -23,7 +23,7 @@ const NavOption = () => {
       </li>
       <li>
         <NavLink to="/dashboard">Dashboard</NavLink>
-      </li> */}
+      </li>
     </>
   );
 };
