@@ -6,6 +6,7 @@ import AllArticles from "../pages/AllArticles";
 import ErrorPage from "../pages/ErrorPage";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
+import ArticleDetails from "../pages/ArticleDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const routes = createBrowserRouter([
       {
         path: "/all-articles",
         element: <AllArticles />,
+      },
+      {
+        path: "/news/:id",
+        element: <ArticleDetails />,
       },
       {
         path: "/sign-up",
