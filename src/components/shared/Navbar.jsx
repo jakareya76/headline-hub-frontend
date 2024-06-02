@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
 import NavOption from "./NavOption";
 
 import { FaUser } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, loading, logoutUser } = useAuth();
+
   return (
     <nav className="container z-[9999] mx-auto bg-transparent">
       <div className="navbar">
@@ -49,22 +51,45 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="gap-5 mr-5 navbar-end">
-          <div className="p-4 rounded-full bg-slate-200">
-            <FaUser />
-          </div>
+          {loading ? (
+            <span className="loading loading-spinner text-primary"></span>
+          ) : (
+            <>
+              {user && (
+                <div className="p-1 rounded-full bg-slate-200">
+                  <img
+                    src={user?.photoURL}
+                    alt=""
+                    className="w-[40px] rounded-full h-[40px] object-cover"
+                  />
+                </div>
+              )}
 
-          <Link
-            to="login"
-            className="px-6 text-white bg-blue-500 btn hover:bg-blue-600 hover:text-white"
-          >
-            Login
-          </Link>
-          <Link
-            to="sign-up"
-            className="px-5 text-white bg-green-500 btn hover:bg-green-600 hover:text-white"
-          >
-            Sign Up
-          </Link>
+              {user ? (
+                <button
+                  className="px-8 btn btn-primary"
+                  onClick={() => logoutUser()}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="login"
+                    className="px-6 text-white bg-blue-500 btn hover:bg-blue-600 hover:text-white"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="sign-up"
+                    className="px-5 text-white bg-green-500 btn hover:bg-green-600 hover:text-white"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </nav>

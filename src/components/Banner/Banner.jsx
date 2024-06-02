@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import SlideControl from "./SlideControl";
 
 import "swiper/css/navigation";
@@ -9,7 +9,13 @@ const Banner = ({ allNews }) => {
     <div>
       <div className="grid gap-2 md:grid-rows-2 md:grid-cols-4">
         <div className="relative col-span-2 row-span-2 overflow-hidden">
-          <Swiper modules={[Navigation]}>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+          >
             {allNews.slice(0, 6).map((news) => {
               return (
                 <SwiperSlide key={news._id}>
