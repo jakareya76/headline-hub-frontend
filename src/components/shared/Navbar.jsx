@@ -6,14 +6,14 @@ import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav className="container bg-transparent mx-auto z-50 ">
-      <div className="navbar text-white">
+    <nav className="container z-50 mx-auto bg-transparent">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="w-5 h-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -34,13 +34,13 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/">
-            <button className="shadows-into-light text-3xl">
+            <button className="text-3xl shadows-into-light">
               Headline Hub
             </button>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-5 px-1">
+        <div className="hidden navbar-center lg:flex">
+          <ul className="gap-5 px-1 menu menu-horizontal">
             <NavOption />
           </ul>
         </div>
