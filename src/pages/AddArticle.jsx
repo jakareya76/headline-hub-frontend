@@ -1,13 +1,30 @@
 import { useForm } from "react-hook-form";
+import Select from "react-select";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
+const options = [
+  { value: "Health", label: "Health" },
+  { value: "Sports", label: "Sports" },
+  { value: "Politics", label: "Politics" },
+  { value: "Travel", label: "Travel" },
+  { value: "Science", label: "Science" },
+  { value: "Culture", label: "Culture" },
+  { value: "Environment", label: "Environment" },
+  { value: "Technology", label: "Technology" },
+  { value: "Business", label: "Business" },
+  { value: "World", label: "World" },
+];
+
 const AddArticle = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const { handleSubmit, register, reset } = useForm();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -28,17 +45,18 @@ const AddArticle = () => {
     if (res.data.success) {
       const result = await axiosSecure.post("/news", {
         title: data.title,
-        category: data.category,
+        category: selectedOption.value,
         content: data.content,
         image: img_url,
         author: author,
         email: user?.email,
         date: new Date().toLocaleDateString(),
+        isPending: true,
       });
 
       if (result.data.insertedId) {
         reset();
-        toast.success("Successfully Added Article");
+        toast.success("Article Added in Pending Wait For Admin To Approve");
       }
     }
   };
@@ -54,11 +72,12 @@ const AddArticle = () => {
             className="input input-bordered"
             {...register("title", { required: true })}
           />
-          <input
-            type="text"
-            placeholder="category"
-            className="input input-bordered"
-            {...register("category", { required: true })}
+
+          <Select
+            value={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
+            className="my-1"
           />
           <textarea
             type="text"
