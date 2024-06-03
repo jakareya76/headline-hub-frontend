@@ -2,7 +2,7 @@ import { FaTimes } from "react-icons/fa";
 
 const Plans = () => {
   return (
-    <div className="pb-20">
+    <section className="pb-20">
       <h2 className="text-3xl font-semibold text-center">Choose A Plan</h2>
       <div className="flex flex-wrap items-center justify-center gap-8 mt-10">
         <div className="h-[350px] text-white bg-gray-800 shadow-xl card w-96">
@@ -54,7 +54,7 @@ const Plans = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

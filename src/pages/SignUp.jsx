@@ -12,8 +12,9 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const SignUp = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { signUp, user } = useAuth();
   const navigate = useNavigate();
+
+  const { signUp, user } = useAuth();
   const axiosPublic = useAxiosPublic();
 
   const onSubmit = async (data) => {
@@ -36,6 +37,7 @@ const SignUp = () => {
         });
 
         toast.success("Sign Up Successfull");
+        reset();
         navigate("/");
       } catch (error) {
         console.log("error:", error);
@@ -43,9 +45,9 @@ const SignUp = () => {
     }
   };
 
-  // if (user) {
-  //   return navigate("/");
-  // }
+  if (user) {
+    return navigate("/");
+  }
 
   return (
     <div className="min-h-screen hero bg-base-200">

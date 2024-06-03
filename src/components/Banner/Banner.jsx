@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Banner = ({ allNews }) => {
   return (
-    <div>
+    <section>
       <div className="grid gap-2 md:grid-rows-2 md:grid-cols-4">
         <div className="relative col-span-2 row-span-2 overflow-hidden">
           <Swiper
@@ -56,7 +56,7 @@ const Banner = ({ allNews }) => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -10,7 +10,7 @@ const ArticleCard = ({ news }) => {
       <div className="card-body">
         <div className="badge badge-outline">{news.category}</div>
         <h2 className="card-title">{news.title} </h2>
-        <p>{news.content.slice(0, 115)}...</p>
+        <p>{news?.content?.slice(0, 115)}...</p>
         <Link to={`/news/${news._id}`} className="px-8 btn btn-primary">
           Read More
         </Link>

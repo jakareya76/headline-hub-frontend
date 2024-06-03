@@ -61,13 +61,16 @@ const Navbar = () => {
           ) : (
             <>
               {user && (
-                <div className="p-1 rounded-full bg-slate-200">
+                <Link
+                  to="/my-profile"
+                  className="p-1 rounded-full bg-slate-200"
+                >
                   <img
                     src={user?.photoURL}
                     alt=""
                     className="w-[40px] rounded-full h-[40px] object-cover"
                   />
-                </div>
+                </Link>
               )}
 
               {user ? (

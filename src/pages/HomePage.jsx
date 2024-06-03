@@ -9,7 +9,7 @@ const HomePage = () => {
   const { allNews } = useContext(NewsContext);
 
   return (
-    <div className="container mx-auto">
+    <div>
       <Banner allNews={allNews} />
       <TrendingArticles allNews={allNews} />
       <Statistic />

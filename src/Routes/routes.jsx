@@ -7,6 +7,8 @@ import ErrorPage from "../pages/ErrorPage";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import ArticleDetails from "../pages/ArticleDetails";
+import MyProfile from "../pages/MyProfile";
+import AddArticle from "../pages/AddArticle";
 
 export const routes = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ export const routes = createBrowserRouter([
       {
         path: "/news/:id",
         element: <ArticleDetails />,
+      },
+      {
+        path: "/add-articles",
+        element: <AddArticle />,
+      },
+      {
+        path: "/my-profile",
+        element: <MyProfile />,
       },
       {
         path: "/sign-up",

@@ -2,7 +2,7 @@ import ArticleCard from "./ArticleCard";
 
 const TrendingArticles = ({ allNews }) => {
   return (
-    <div className="py-16">
+    <section className="py-16">
       <h2 className="text-2xl font-semibold text-center">Trending Articles</h2>
 
       <div className="flex items-center justify-center mt-8">
@@ -12,7 +12,7 @@ const TrendingArticles = ({ allNews }) => {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

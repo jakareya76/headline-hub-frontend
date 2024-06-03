@@ -7,7 +7,9 @@ const MainLayout = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main className="container mx-auto">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
