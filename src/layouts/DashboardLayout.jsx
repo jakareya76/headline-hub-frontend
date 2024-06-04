@@ -8,7 +8,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen text-white bg-zinc-800">
+      <div className="min-h-screen text-white w-52 bg-zinc-800">
         <h2 className="my-5 font-mono text-2xl font-semibold text-center">
           Headline Hub
         </h2>
