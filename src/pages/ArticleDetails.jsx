@@ -14,7 +14,13 @@ const ArticleDetails = () => {
       setArticle(res.data);
     };
 
+    const updateNewsViewCount = async () => {
+      const res = await axiosPublic.patch(`/news-increment-view/${id}`);
+      console.log(res);
+    };
+
     getSingleArticle();
+    updateNewsViewCount();
   }, []);
 
   if (!article.title) {

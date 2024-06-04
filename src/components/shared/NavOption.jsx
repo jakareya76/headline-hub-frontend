@@ -33,7 +33,7 @@ const NavOption = () => {
       )}
       {user && !isAdmin && (
         <li>
-          <NavLink to="/dashboard/user-home">Dashboard</NavLink>
+          <NavLink to="/my-profile">Profile</NavLink>
         </li>
       )}
     </>

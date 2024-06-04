@@ -22,8 +22,16 @@ const options = [
   { value: "World", label: "World" },
 ];
 
+const publisherOptions = [
+  { value: "Health", label: "Health" },
+  { value: "Health", label: "Health" },
+  { value: "Health", label: "Health" },
+  { value: "Health", label: "Health" },
+];
+
 const AddArticle = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedPublisher, setSelectedPublisher] = useState(null);
 
   const { handleSubmit, register, reset } = useForm();
   const { user } = useAuth();
@@ -46,13 +54,15 @@ const AddArticle = () => {
       const result = await axiosSecure.post("/news", {
         title: data.title,
         category: selectedOption.value,
+        publisher: selectedPublisher.value,
         content: data.content,
         image: img_url,
         author: author,
         email: user?.email,
         date: new Date().toLocaleDateString(),
-        isPending: true,
         isPremium: false,
+        status: "pending",
+        viewCount: 0,
       });
 
       if (result.data.insertedId) {
@@ -63,14 +73,15 @@ const AddArticle = () => {
   };
 
   return (
-    <section className="py-20">
+    <section className="px-5 py-20">
       <h2 className="mb-10 text-3xl font-semibold text-center">Add Article</h2>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-5">
           <input
             type="text"
             placeholder="title"
-            className="input input-bordered"
+            className="col-span-2 input input-bordered"
             {...register("title", { required: true })}
           />
 
@@ -79,6 +90,13 @@ const AddArticle = () => {
             onChange={setSelectedOption}
             options={options}
             className="my-1"
+          />
+          <Select
+            value={selectedPublisher}
+            onChange={setSelectedPublisher}
+            options={publisherOptions}
+            className="my-1"
+            placeholder="select publisher"
           />
           <textarea
             type="text"

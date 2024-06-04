@@ -11,10 +11,15 @@ import MyProfile from "../pages/MyProfile";
 import AddArticle from "../pages/AddArticle";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Admin from "../pages/Dashboard/Admin";
-import UserHome from "../pages/Dashboard/UserHome";
 
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import Subscription from "../pages/Subscription";
+import PremiumArticles from "../pages/PremiumArticles";
+import MyArticles from "../pages/MyArticles";
+import AllUsers from "../pages/Dashboard/AllUsers";
+import AddPublisher from "../pages/Dashboard/AddPublisher";
+import ManageArticles from "../pages/Dashboard/ManageArticles";
 
 export const routes = createBrowserRouter([
   {
@@ -47,6 +52,18 @@ export const routes = createBrowserRouter([
         element: <MyProfile />,
       },
       {
+        path: "/subscription",
+        element: <Subscription />,
+      },
+      {
+        path: "/my-articles",
+        element: <MyArticles />,
+      },
+      {
+        path: "/premium-articles",
+        element: <PremiumArticles />,
+      },
+      {
         path: "/sign-up",
         element: <SignUp />,
       },
@@ -64,7 +81,6 @@ export const routes = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // admin dashboard routes
       {
         path: "admin-home",
         element: (
@@ -73,11 +89,29 @@ export const routes = createBrowserRouter([
           </AdminRoute>
         ),
       },
-
-      // user dashboard routes
       {
-        path: "user-home",
-        element: <UserHome />,
+        path: "all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-articles",
+        element: (
+          <AdminRoute>
+            <ManageArticles />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-publisher",
+        element: (
+          <AdminRoute>
+            <AddPublisher />
+          </AdminRoute>
+        ),
       },
     ],
   },

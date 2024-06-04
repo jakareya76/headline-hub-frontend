@@ -1,4 +1,5 @@
 import { FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Plans = () => {
   return (
@@ -21,7 +22,9 @@ const Plans = () => {
                 <FaTimes color="red" className="mt-1" />
               </div>
             </ul>
-            <button className="btn btn-primary">Buy Now</button>
+            <Link to="subscription" className="btn btn-primary">
+              Buy Now
+            </Link>
           </div>
         </div>
         <div className="h-[350px] text-white bg-gray-800 shadow-xl card w-96">
@@ -37,7 +40,9 @@ const Plans = () => {
                 <FaTimes color="red" className="mt-1" />
               </div>
             </ul>
-            <button className="btn btn-primary">Buy Now</button>
+            <Link to="subscription" className="btn btn-primary">
+              Buy Now
+            </Link>
           </div>
         </div>
         <div className="h-[350px] text-white bg-gray-800 shadow-xl card w-96">
@@ -50,7 +55,9 @@ const Plans = () => {
               <li>Add Articles</li>
               <li>Get Premium Access</li>
             </ul>
-            <button className="btn btn-primary">Buy Now</button>
+            <Link to="subscription" className="btn btn-primary">
+              Buy Now
+            </Link>
           </div>
         </div>
       </div>

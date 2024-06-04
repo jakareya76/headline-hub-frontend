@@ -8,30 +8,37 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-[#D1A054]">
-        <h2 className="my-5 font-mono text-3xl font-semibold text-center">
+      <div className="w-64 min-h-screen text-white bg-zinc-800">
+        <h2 className="my-5 font-mono text-2xl font-semibold text-center">
           Headline Hub
         </h2>
         <ul className="p-4 space-y-3 menu">
-          {isAdmin ? (
+          {isAdmin && (
             <>
               <li>
-                <NavLink to="/dashboard">
+                <NavLink to="/dashboard/admin-home">
                   <FaHome /> Admin Home
                 </NavLink>
               </li>
-            </>
-          ) : (
-            <>
               <li>
-                <NavLink to="/dashboard">
-                  <FaHome /> User Home
+                <NavLink to="/dashboard/all-users">
+                  <FaHome /> All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manage-articles">
+                  <FaHome />
+                  Manage Articles
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/add-publisher">
+                  <FaHome /> Add Publisher
                 </NavLink>
               </li>
             </>
           )}
-
-          <div className="divider"></div>
+          <div className="divider divider-success"></div>
 
           <li>
             <NavLink to="/">
