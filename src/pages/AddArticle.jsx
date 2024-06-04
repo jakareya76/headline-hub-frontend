@@ -23,10 +23,11 @@ const options = [
 ];
 
 const publisherOptions = [
-  { value: "Health", label: "Health" },
-  { value: "Health", label: "Health" },
-  { value: "Health", label: "Health" },
-  { value: "Health", label: "Health" },
+  { value: "BBC", label: "BBC" },
+  { value: "Business Daily", label: "Business Daily" },
+  { value: "Global Times", label: "Global Times" },
+  { value: "CNN", label: "CNN" },
+  { value: "New York Times", label: "New York Times" },
 ];
 
 const AddArticle = () => {

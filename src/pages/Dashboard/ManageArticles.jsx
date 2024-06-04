@@ -110,7 +110,28 @@ const ManageArticles = () => {
   };
 
   const handleMakePremium = (id) => {
-    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make it Premium!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.patch(`/news-make-premium/${id}`);
+
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Completed!",
+            text: "News Has Been Premium.",
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   return (
@@ -143,6 +164,7 @@ const ManageArticles = () => {
               {articles.map((article) => {
                 const isPending = article.status === "pending" ? true : false;
                 const isDecline = article.status === "decline" ? true : false;
+                const isPremium = article.isPremium ? true : false;
                 return (
                   <tr key={article._id}>
                     <th>
@@ -178,14 +200,19 @@ const ManageArticles = () => {
                         </>
                       ) : (
                         <>
-                          {!isDecline && (
-                            <button
-                              onClick={() => handleMakePremium(article._id)}
-                              className="flex col-span-2 text-xs text-white btn btn-sm btn-primary "
-                            >
-                              make premium
-                            </button>
-                          )}
+                          {!isDecline &&
+                            (isPremium ? (
+                              <button className="flex col-span-2 text-xs text-white btn btn-sm btn-primary">
+                                premium
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleMakePremium(article._id)}
+                                className="flex col-span-2 text-xs text-white btn btn-sm btn-primary"
+                              >
+                                make premium
+                              </button>
+                            ))}
 
                           <button
                             onClick={() => handleDelete(article._id)}
