@@ -52,6 +52,7 @@ const AddArticle = () => {
         email: user?.email,
         date: new Date().toLocaleDateString(),
         isPending: true,
+        isPremium: false,
       });
 
       if (result.data.insertedId) {

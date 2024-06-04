@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
 
 const NavOption = () => {
+  const { user, loading, logout } = useAuth();
+  const [isAdmin] = useAdmin();
+
   return (
     <>
       <li>
@@ -21,9 +26,16 @@ const NavOption = () => {
       <li>
         <NavLink to="/my-articles">My Articles</NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
+      {user && isAdmin && (
+        <li>
+          <NavLink to="/dashboard/admin-home">Dashboard</NavLink>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <NavLink to="/dashboard/user-home">Dashboard</NavLink>
+        </li>
+      )}
     </>
   );
 };

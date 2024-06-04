@@ -37,7 +37,18 @@ const SignUp = () => {
         });
 
         toast.success("Sign Up Successfull");
-        reset();
+
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+
+        const res = await axiosPublic.post("/users", userInfo);
+
+        if (res.data.insertedId) {
+          navigate("/");
+          reset();
+        }
         navigate("/");
       } catch (error) {
         console.log("error:", error);

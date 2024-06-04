@@ -9,6 +9,12 @@ import Login from "../pages/Login";
 import ArticleDetails from "../pages/ArticleDetails";
 import MyProfile from "../pages/MyProfile";
 import AddArticle from "../pages/AddArticle";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Admin from "../pages/Dashboard/Admin";
+import UserHome from "../pages/Dashboard/UserHome";
+
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -30,7 +36,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/add-articles",
-        element: <AddArticle />,
+        element: (
+          <PrivateRoute>
+            <AddArticle />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-profile",
@@ -43,6 +53,31 @@ export const routes = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      // admin dashboard routes
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <Admin />
+          </AdminRoute>
+        ),
+      },
+
+      // user dashboard routes
+      {
+        path: "user-home",
+        element: <UserHome />,
       },
     ],
   },
