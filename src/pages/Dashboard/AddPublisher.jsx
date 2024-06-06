@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
@@ -11,6 +12,14 @@ const AddPublisher = () => {
 
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  const { data: publishers = [], refetch } = useQuery({
+    queryKey: ["publishers"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/publishers");
+      return res.data;
+    },
+  });
 
   const onSubmit = async (data) => {
     const imageFile = { image: data.image[0] };
@@ -30,8 +39,18 @@ const AddPublisher = () => {
 
       if (result.data.insertedId) {
         reset();
+        refetch();
         toast.success("Publisher Added Successfully");
       }
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const res = await axiosSecure.delete(`/publishers/${id}`);
+
+    if (res.data.deletedCount > 0) {
+      refetch();
+      toast("Publisher Deleted Successfully");
     }
   };
 
@@ -57,6 +76,34 @@ const AddPublisher = () => {
             Add Publisher
           </button>
         </form>
+      </div>
+
+      <div className="py-20">
+        <h2 className="text-3xl font-semibold text-center">All Publishers</h2>
+        <div className="flex items-center justify-center my-8">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
+            {publishers.map((publisher) => {
+              return (
+                <div key={publisher._id} className="p-2 rounded bg-zinc-300">
+                  <img
+                    src={publisher.image}
+                    alt="logo"
+                    className="w-[300px] p-5 h-[250px] object-fill"
+                  />
+                  <h2 className="text-xl font-semibold text-center">
+                    {publisher.name}
+                  </h2>
+                  <button
+                    onClick={() => handleDelete(publisher._id)}
+                    className="w-full mt-4 text-white btn btn-error"
+                  >
+                    Delete
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
