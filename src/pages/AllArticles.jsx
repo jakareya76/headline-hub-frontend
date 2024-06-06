@@ -9,7 +9,7 @@ const AllArticles = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPublisher, setSelectedPublisher] = useState("");
-  const [selectedTags, setSelectedTags] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const axiosSecure = useAxiosSecure();
 
@@ -24,7 +24,7 @@ const AllArticles = () => {
   };
 
   const handleCategoryChange = (event) => {
-    setSelectedTags(event.target.value);
+    setSelectedCategory(event.target.value);
     updateFilters({ selectedCategory: event.target.value });
   };
 
@@ -91,7 +91,7 @@ const AllArticles = () => {
           <select
             className="w-full max-w-xs select select-bordered"
             onChange={handleCategoryChange}
-            value={selectedTags}
+            value={selectedCategory}
           >
             <option value="">All Category</option>
             <option value="Business">Business</option>

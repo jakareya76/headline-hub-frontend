@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { updateProfile } from "firebase/auth";
@@ -6,15 +7,17 @@ import { auth } from "../firebase/firebase.config";
 import useAuth from "../hooks/useAuth";
 import authImage from "../assets/auth.svg";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SignUp = () => {
+  const [togglePassword, settogglePassword] = useState(true);
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 
-  const { signUp, user } = useAuth();
+  const { signUp, user, signInWithGoogle } = useAuth();
   const axiosPublic = useAxiosPublic();
 
   const onSubmit = async (data) => {
@@ -98,13 +101,28 @@ const SignUp = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                {...register("password", { required: true })}
-                required
-              />
+              <div className="relative">
+                <input
+                  type={togglePassword ? "password" : "text"}
+                  name="password"
+                  placeholder="password"
+                  className="w-full input input-bordered"
+                  {...register("password", { required: true })}
+                />
+                {togglePassword ? (
+                  <FaEyeSlash
+                    size={20}
+                    className="absolute top-[15px] cursor-pointer right-3"
+                    onClick={() => settogglePassword(!togglePassword)}
+                  />
+                ) : (
+                  <FaEye
+                    size={20}
+                    className="absolute top-[15px] cursor-pointer right-3"
+                    onClick={() => settogglePassword(!togglePassword)}
+                  />
+                )}
+              </div>
             </div>
             <input
               type="file"
@@ -122,6 +140,12 @@ const SignUp = () => {
               </Link>
             </h2>
           </form>
+          <button
+            onClick={() => signInWithGoogle()}
+            className="flex items-center justify-center gap-3 py-3 mx-5 mb-5 text-white bg-blue-500 border rounded w hover:bg-blue-600 hover:text-white"
+          >
+            <FaGoogle /> Connect With Google
+          </button>
         </div>
       </div>
     </div>
