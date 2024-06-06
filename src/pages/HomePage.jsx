@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import Banner from "../components/Banner/Banner";
 import TrendingArticles from "../components/TrendingArticles/TrendingArticles";
 import Statistic from "../components/Statistic";
@@ -6,17 +6,15 @@ import Plans from "../components/Plans";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const HomePage = () => {
-  const [allNews, setAllNews] = useState([]);
   const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    const getAllNewsData = async () => {
+  const { data: allNews = [] } = useQuery({
+    queryKey: ["all-news"],
+    queryFn: async () => {
       const res = await axiosSecure.get("/all-news");
-      setAllNews(res.data);
-    };
-
-    getAllNewsData();
-  }, []);
+      return res.data;
+    },
+  });
 
   return (
     <div>

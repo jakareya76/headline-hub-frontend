@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { useQuery } from "react-query";
 import { NewsContext } from "../context/NewsProvider";
 import ArticleCard from "../components/TrendingArticles/ArticleCard";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllArticles = () => {
-  const [publisherOptions, setPublisherOptions] = useState([]);
   const { allNews, updateFilters } = useContext(NewsContext);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,22 +30,13 @@ const AllArticles = () => {
 
   const filteredNews = allNews.filter((news) => news.status === "active");
 
-  useEffect(() => {
-    const getPublishersName = async () => {
+  const { data: publisherOptions = [] } = useQuery({
+    queryKey: ["publishers"],
+    queryFn: async () => {
       const res = await axiosSecure.get("/publishers");
-
-      const options = [];
-
-      res.data.map((item) => {
-        const option = { value: item.name, label: item.name };
-        options.push(option);
-      });
-
-      setPublisherOptions(options);
-    };
-
-    getPublishersName();
-  }, []);
+      return res.data.map((item) => ({ value: item.name, label: item.name }));
+    },
+  });
 
   return (
     <div className="container mx-auto">
