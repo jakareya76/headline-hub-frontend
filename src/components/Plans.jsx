@@ -15,7 +15,6 @@ const Plans = () => {
               <li>Comment Access</li>
               <div className="flex items-center gap-3">
                 <li>Add Articles</li>
-                <FaTimes color="red" className="mt-1" />
               </div>
               <div className="flex items-center gap-3">
                 <li>Get Premium Access</li>
