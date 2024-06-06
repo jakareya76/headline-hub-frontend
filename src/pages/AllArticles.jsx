@@ -1,49 +1,51 @@
 import { useContext, useEffect, useState } from "react";
 import { NewsContext } from "../context/NewsProvider";
 import ArticleCard from "../components/TrendingArticles/ArticleCard";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllArticles = () => {
-  const { allNews } = useContext(NewsContext);
+  const [publisherOptions, setPublisherOptions] = useState([]);
+  const { allNews, updateFilters } = useContext(NewsContext);
 
-  const [articles, setArticles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPublisher, setSelectedPublisher] = useState(null);
-  const [selectedTags, setSelectedTags] = useState(null);
+  const [selectedPublisher, setSelectedPublisher] = useState("");
+  const [selectedTags, setSelectedTags] = useState("");
 
-  const axiosPublic = useAxiosPublic();
-
-  // useEffect(() => {
-  //   const fetchArticles = async () => {
-  //     const res = await axiosPublic.get("/news", {
-  //       params: {
-  //         search: searchTerm,
-  //         publisher: selectedPublisher,
-  //         tags: selectedTags,
-  //         status: "active",
-  //       },
-  //     });
-  //     setArticles(res.data);
-  //     console.log(res);
-  //   };
-
-  //   fetchArticles();
-  // }, [searchTerm, selectedPublisher, selectedTags]);
+  const axiosSecure = useAxiosSecure();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    updateFilters({ searchTerm: event.target.value });
   };
 
   const handlePublisherChange = (event) => {
     setSelectedPublisher(event.target.value);
+    updateFilters({ selectedPublisher: event.target.value });
   };
 
-  const handleTagChange = (event) => {
-    const selected = event.target.value;
-    setSelectedTags(selected);
+  const handleCategoryChange = (event) => {
+    setSelectedTags(event.target.value);
+    updateFilters({ selectedCategory: event.target.value });
   };
 
   const filteredNews = allNews.filter((news) => news.status === "active");
+
+  useEffect(() => {
+    const getPublishersName = async () => {
+      const res = await axiosSecure.get("/publishers");
+
+      const options = [];
+
+      res.data.map((item) => {
+        const option = { value: item.name, label: item.name };
+        options.push(option);
+      });
+
+      setPublisherOptions(options);
+    };
+
+    getPublishersName();
+  }, []);
 
   return (
     <div className="container mx-auto">
@@ -56,6 +58,7 @@ const AllArticles = () => {
               type="text"
               className="grow"
               placeholder="Search"
+              value={searchTerm}
               onChange={handleSearchChange}
             />
             <svg
@@ -76,32 +79,39 @@ const AllArticles = () => {
             value={selectedPublisher}
             onChange={handlePublisherChange}
           >
-            <option selected disabled>
-              All Publishers
-            </option>
-            <option>Publishers One</option>
-            <option>Publishers Tow</option>
-            <option>Publishers Three</option>
+            <option value="">All Publishers</option>
+            {publisherOptions.map((options, idx) => {
+              return (
+                <option key={idx} value={options.value}>
+                  {options.label}
+                </option>
+              );
+            })}
           </select>
           <select
             className="w-full max-w-xs select select-bordered"
-            onChange={handleTagChange}
+            onChange={handleCategoryChange}
             value={selectedTags}
           >
-            <option selected disabled>
-              All Tags
-            </option>
-            <option>Tags One</option>
-            <option>Tags Tow</option>
-            <option>Tags Three</option>
+            <option value="">All Category</option>
+            <option value="Business">Business</option>
+            <option value="World">World</option>
+            <option value="Technology">Technology</option>
+            <option value="Environment">Environment</option>
+            <option value="Culture">Culture</option>
+            <option value="Science">Science</option>
+            <option value="Travel">Travel</option>
+            <option value="Politics">Politics</option>
+            <option value="Sports">Sports</option>
+            <option value="Health">Health</option>
           </select>
         </div>
 
         <div className="flex items-center justify-center mt-8">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {filteredNews.map((news) => {
-              return <ArticleCard key={news._id} news={news} />;
-            })}
+            {filteredNews.map((news) => (
+              <ArticleCard key={news._id} news={news} />
+            ))}
           </div>
         </div>
       </div>

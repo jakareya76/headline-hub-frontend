@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMGBB_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -22,17 +22,10 @@ const options = [
   { value: "World", label: "World" },
 ];
 
-const publisherOptions = [
-  { value: "BBC", label: "BBC" },
-  { value: "Business Daily", label: "Business Daily" },
-  { value: "Global Times", label: "Global Times" },
-  { value: "CNN", label: "CNN" },
-  { value: "New York Times", label: "New York Times" },
-];
-
 const AddArticle = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedPublisher, setSelectedPublisher] = useState(null);
+  const [publisherOptions, setPublisherOptions] = useState([]);
 
   const { handleSubmit, register, reset } = useForm();
   const { user } = useAuth();
@@ -72,6 +65,23 @@ const AddArticle = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const getPublishersName = async () => {
+      const res = await axiosSecure.get("/publishers");
+
+      const options = [];
+
+      res.data.map((item) => {
+        const option = { value: item.name, label: item.name };
+        options.push(option);
+      });
+
+      setPublisherOptions(options);
+    };
+
+    getPublishersName();
+  }, []);
 
   return (
     <section className="px-5 py-20">
