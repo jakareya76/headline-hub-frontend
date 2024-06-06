@@ -49,19 +49,35 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/my-profile",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/subscription",
-        element: <Subscription />,
+        element: (
+          <PrivateRoute>
+            <Subscription />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-articles",
-        element: <MyArticles />,
+        element: (
+          <PrivateRoute>
+            <MyArticles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/premium-articles",
-        element: <PremiumArticles />,
+        element: (
+          <PrivateRoute>
+            <PremiumArticles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/sign-up",

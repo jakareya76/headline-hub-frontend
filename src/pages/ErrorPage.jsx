@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
+import pageNotFoundImage from "../assets/page_not_found.svg";
 
 const ErrorPage = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center flex-col">
-      <h2 className="text-5xl font-bold text-white font-mono">404</h2>
-      <h2 className="text-2xl my-3 font-bold text-white font-mono">
-        Page Not Found
-      </h2>
+    <div className="flex flex-col items-center justify-center w-full h-screen">
+      <img src={pageNotFoundImage} alt="404" className="w-[320px]" />
+      <h2 className="my-8 font-mono text-4xl font-bold">Page Not Found</h2>
       <Link
         to="/"
-        className="text-white bg-slate-800 px-8 py-3 rounded-md text-xl font-semibold hover:bg-slate-900"
+        className="px-8 py-3 text-xl font-semibold text-white rounded-md bg-slate-800 hover:bg-slate-900"
       >
         Go Back
       </Link>

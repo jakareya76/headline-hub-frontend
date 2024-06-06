@@ -45,7 +45,7 @@ const Navbar = () => {
             </button>
           </Link>
         </div>
-        <div className="hidden navbar-center lg:flex">
+        <div className="hidden navbar-center lg:block">
           <ul className="gap-5 px-1 menu menu-horizontal">
             <Link to="/" className="hidden lg:block">
               <button className="text-xl lg:text-3xl shadows-into-light">

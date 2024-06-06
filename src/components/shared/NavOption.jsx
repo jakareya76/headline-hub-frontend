@@ -14,18 +14,23 @@ const NavOption = () => {
       <li>
         <NavLink to="/all-articles">All Articles</NavLink>
       </li>
-      <li>
-        <NavLink to="/add-articles">Add Articles</NavLink>
-      </li>
-      <li>
-        <NavLink to="/subscription">Subscription</NavLink>
-      </li>
-      <li>
-        <NavLink to="/premium-articles">Premium Articles</NavLink>
-      </li>
-      <li>
-        <NavLink to="/my-articles">My Articles</NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/add-articles">Add Articles</NavLink>
+          </li>
+          <li>
+            <NavLink to="/subscription">Subscription</NavLink>
+          </li>
+          <li>
+            <NavLink to="/premium-articles">Premium Articles</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-articles">My Articles</NavLink>
+          </li>
+        </>
+      )}
+
       {user && isAdmin && (
         <li>
           <NavLink to="/dashboard/admin-home">Dashboard</NavLink>
