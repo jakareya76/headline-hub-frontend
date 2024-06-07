@@ -1,4 +1,3 @@
-import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Plans = () => {
@@ -17,8 +16,7 @@ const Plans = () => {
                 <li>Add Articles</li>
               </div>
               <div className="flex items-center gap-3">
-                <li>Get Premium Access</li>
-                <FaTimes color="red" className="mt-1" />
+                <li>only publish 1 article</li>
               </div>
             </ul>
             <Link to="subscription" className="btn btn-primary">
@@ -35,8 +33,7 @@ const Plans = () => {
               <li>Comment Access</li>
               <li>Add Articles</li>
               <div className="flex items-center gap-3">
-                <li>Get Premium Access</li>
-                <FaTimes color="red" className="mt-1" />
+                <li>only publish 5 article</li>
               </div>
             </ul>
             <Link to="subscription" className="btn btn-primary">
@@ -52,7 +49,7 @@ const Plans = () => {
               <li>Unlimited Articles Read</li>
               <li>Comment Access</li>
               <li>Add Articles</li>
-              <li>Get Premium Access</li>
+              <li>Post unlimited articles</li>
             </ul>
             <Link to="subscription" className="btn btn-primary">
               Buy Now

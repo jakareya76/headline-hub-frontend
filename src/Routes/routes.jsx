@@ -20,6 +20,7 @@ import MyArticles from "../pages/MyArticles";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import AddPublisher from "../pages/Dashboard/AddPublisher";
 import ManageArticles from "../pages/Dashboard/ManageArticles";
+import Payment from "../pages/Payment";
 
 export const routes = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const routes = createBrowserRouter([
             <PremiumArticles />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
       {
         path: "/sign-up",
