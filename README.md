@@ -4,7 +4,7 @@ HeadlineHub is a comprehensive news aggregation platform that not only delivers 
 
 ## Live Link
 
-Check out the live demo of the application: [HeadlineHub Live](http://your-live-site-url.com)
+Check out the live demo of the application: [HeadlineHub Live](https://headline-hub-762d6.web.app)
 
 ## Admin Credentials
 
