@@ -31,6 +31,20 @@ const SignUp = () => {
 
     const img_url = res.data.data.display_url;
 
+    if (data.password.length < 6) {
+      return toast.error("Password must be at least 6 characters long.");
+    }
+
+    if (/[A-Z]/.test(data.password)) {
+      return toast.error("Password must not contain capital letters.");
+    }
+
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(data.password)) {
+      return toast.error(
+        "Password must contain at least one special character."
+      );
+    }
+
     if (res.data.success) {
       try {
         await signUp(data.email, data.password);
