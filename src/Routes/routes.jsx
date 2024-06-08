@@ -81,7 +81,7 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/payment",
+        path: "/payment/:price",
         element: <Payment />,
       },
       {

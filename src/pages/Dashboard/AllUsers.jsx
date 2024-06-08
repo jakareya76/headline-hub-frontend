@@ -97,15 +97,17 @@ const AllUsers = () => {
                   <td>{user.email}</td>
                   <td>
                     {user.role === "admin" ? (
-                      <button className="text-white btn btn-success ">
+                      <button className="text-white btn w-[250px] btn-success ">
                         <MdAdminPanelSettings /> Admin
                       </button>
                     ) : (
                       <button
                         onClick={() => handleMakeAdmin(user)}
-                        className="text-white btn btn-success "
+                        className="text-white btn w-[250px] btn-success "
                       >
-                        <FaUsers /> USER | Make Admin
+                        <FaUsers />
+                        {user?.isPremium ? "Premium USER" : "Normal USER"} |
+                        Make Admin
                       </button>
                     )}
                   </td>
