@@ -1,6 +1,22 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const ArticleCard = ({ news }) => {
+  const axiosPublic = useAxiosPublic();
+
+  const { user } = useAuth();
+  const email = user?.email;
+
+  const { data: currentUser = [] } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/single-user/${email}`);
+      return res.data;
+    },
+  });
+
   return (
     <div
       className={`shadow-xl card w-96 bg-base-100 ${
@@ -23,7 +39,12 @@ const ArticleCard = ({ news }) => {
         <h2 className="card-title">{news.title} </h2>
         <p>{news?.content?.slice(0, 115)}...</p>
         {news?.isPremium ? (
-          <Link to={`/news/${news._id}`} className="px-8 btn btn-disabled">
+          <Link
+            to={`/news/${news._id}`}
+            className={`px-8 btn ${
+              currentUser?.isPremium ? "btn-active btn-warning" : "btn-disabled"
+            } btn`}
+          >
             Read Premium News
           </Link>
         ) : (
