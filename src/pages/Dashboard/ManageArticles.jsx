@@ -141,7 +141,9 @@ const ManageArticles = () => {
         <div className="flex items-center justify-center">
           <div className="w-full p-4 mt-5 border rounded">
             <div className="flex items-center">
-              <h2 className="text-2xl font-semibold">Total Articles: 0</h2>
+              <h2 className="text-2xl font-semibold">
+                Total Articles: {articles.length}
+              </h2>
             </div>
           </div>
         </div>

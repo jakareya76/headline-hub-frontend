@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useQuery } from "react-query";
+import { useState } from "react";
 
 const MyArticles = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [feedback, setFeedback] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: allNews = [], refetch } = useQuery({
     queryKey: ["my-articles"],
@@ -43,6 +46,16 @@ const MyArticles = () => {
     });
   };
 
+  const openModal = (feedback) => {
+    setFeedback(feedback);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setFeedback(null);
+  };
+
   return (
     <div className="container mx-auto">
       <div className="py-16">
@@ -56,58 +69,81 @@ const MyArticles = () => {
               <tr>
                 <th>*No</th>
                 <th>Image</th>
-                <th>author</th>
-                <th>title</th>
-                <th>publisher</th>
-                <th>status</th>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Publisher</th>
+                <th>Status</th>
                 <th>isPremium</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {myArticles.map((news, idx) => {
-                return (
-                  <tr key={news._id}>
-                    <th>{idx + 1}</th>
-                    <td>
-                      <img
-                        src={news.image}
-                        alt="image"
-                        className="w-[60px] rounded"
-                      />
-                    </td>
-                    <td>{news.author}</td>
-                    <td>{news.title}</td>
-                    <td>{news.publisher}</td>
-                    <td>{news.status}</td>
-                    <td>{news.isPremium ? "Yes" : "No"}</td>
-                    <td className="flex gap-4">
-                      <Link
-                        to={`/news/${news._id}`}
-                        className="btn btn-primary btn-sm"
-                      >
-                        View Details
-                      </Link>
-                      <Link
-                        to={`/update-article/${news._id}`}
-                        className="btn btn-warning btn-sm"
-                      >
-                        Update
-                      </Link>
+              {myArticles.map((news, idx) => (
+                <tr key={news._id}>
+                  <th>{idx + 1}</th>
+                  <td>
+                    <img
+                      src={news.image}
+                      alt="image"
+                      className="w-[60px] rounded"
+                    />
+                  </td>
+                  <td>{news.author}</td>
+                  <td>{news.title}</td>
+                  <td>{news.publisher}</td>
+                  <td className="flex gap-1 mt-5">
+                    <h4 className="mt-1">{news.status}</h4>
+                    {news.feedback && (
                       <button
-                        onClick={() => handleDelete(news._id)}
-                        className="text-white btn btn-error btn-sm"
+                        onClick={() => openModal(news.feedback)}
+                        className="ml-2 btn btn-sm btn-primary"
                       >
-                        Delete
+                        Reason
                       </button>
-                    </td>
-                  </tr>
-                );
-              })}
+                    )}
+                  </td>
+                  <td>{news.isPremium ? "Yes" : "No"}</td>
+                  <td className="flex gap-4">
+                    <Link
+                      to={`/news/${news._id}`}
+                      className="btn btn-primary btn-sm"
+                    >
+                      View Details
+                    </Link>
+                    <Link
+                      to={`/update-article/${news._id}`}
+                      className="btn btn-warning btn-sm"
+                    >
+                      Update
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(news._id)}
+                      className="text-white btn btn-error btn-sm"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
+
+      {isModalOpen && (
+        <dialog open className="modal">
+          <div className="modal-box">
+            <button
+              onClick={closeModal}
+              className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
+            >
+              ✕
+            </button>
+            <h3 className="text-lg font-bold">Feedback!</h3>
+            <p className="py-4">{feedback}</p>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 };
