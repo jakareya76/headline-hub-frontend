@@ -34,7 +34,7 @@ const NewsProvider = ({ children }) => {
   };
 
   return (
-    <NewsContext.Provider value={{ allNews, updateFilters }}>
+    <NewsContext.Provider value={{ allNews, updateFilters, refetch }}>
       {children}
     </NewsContext.Provider>
   );

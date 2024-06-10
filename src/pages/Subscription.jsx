@@ -17,8 +17,14 @@ const SubscriptionPage = () => {
 
   if (currentUser.isPremium) {
     return (
-      <div className="w-full h-screen">
-        <h2 className="my-20 text-2xl font-semibold text-center">
+      <div
+        style={{
+          backgroundImage: `url('https://images.pexels.com/photos/3483098/pexels-photo-3483098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`,
+        }}
+        className="relative flex items-center justify-center w-full h-screen mb-2 bg-no-repeat bg-cover rounded-xl"
+      >
+        <div className="w-full h-full bg-[#00000075] absolute"></div>
+        <h2 className="z-50 text-4xl font-bold text-center text-white ">
           Your Already Premium User
         </h2>
       </div>
@@ -26,7 +32,18 @@ const SubscriptionPage = () => {
   }
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full pb-10">
+      <div
+        style={{
+          backgroundImage: `url('https://images.pexels.com/photos/3483098/pexels-photo-3483098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`,
+        }}
+        className="w-full flex items-center justify-center relative h-[300px] bg-no-repeat bg-cover"
+      >
+        <div className="w-full h-full bg-[#00000075] absolute"></div>
+        <h2 className="z-50 text-4xl font-bold text-center text-white ">
+          Become A Premium User
+        </h2>
+      </div>
       <h2 className="my-10 text-2xl font-semibold text-center">Get Premium</h2>
       <div className="flex flex-wrap items-center justify-center gap-10">
         <div>

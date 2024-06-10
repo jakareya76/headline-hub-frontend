@@ -21,6 +21,7 @@ import AllUsers from "../pages/Dashboard/AllUsers";
 import AddPublisher from "../pages/Dashboard/AddPublisher";
 import ManageArticles from "../pages/Dashboard/ManageArticles";
 import Payment from "../pages/Payment";
+import UpdateArticle from "../pages/UpdateArticle";
 
 export const routes = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddArticle />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-article/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateArticle />
           </PrivateRoute>
         ),
       },
