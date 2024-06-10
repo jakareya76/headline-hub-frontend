@@ -6,14 +6,17 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { MdDelete } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { useState } from "react";
 
 const AllUsers = () => {
+  const [allUsers, setAllUsers] = useState([]);
   const axiosSecure = useAxiosSecure();
 
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
+      setAllUsers(res.data);
       return res.data;
     },
   });
@@ -63,7 +66,7 @@ const AllUsers = () => {
         <div className="w-full p-4 mt-5 border rounded">
           <div className="flex items-center">
             <h2 className="text-2xl font-semibold">
-              Total Users: {users.length}
+              Total Users: {users?.length}
             </h2>
           </div>
         </div>
@@ -82,7 +85,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, idx) => {
+            {allUsers?.map((user) => {
               return (
                 <tr key={user._id}>
                   <th>
