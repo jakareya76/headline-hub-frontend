@@ -30,18 +30,19 @@ const AddPublisher = () => {
       },
     });
 
+    console.log(res);
+
     const img_url = res.data.data.display_url;
+
+    console.log(img_url);
 
     const publisher_info = { name: data.name, image: img_url };
 
     if (res.data.success) {
-      const result = await axiosSecure.post("/publishers", { publisher_info });
-
-      if (result.data.insertedId) {
-        reset();
-        refetch();
-        toast.success("Publisher Added Successfully");
-      }
+      await axiosSecure.post("/publishers", publisher_info);
+      toast.success("Publisher Added Successfully");
+      reset();
+      refetch();
     }
   };
 
